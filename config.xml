@@ -2,7 +2,7 @@
 <widget id="com.hackathon.together" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Together</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        A perfect app to keep together with your folks.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team

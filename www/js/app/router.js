@@ -7,7 +7,9 @@ define(['marionette'], function (Marionette) {
         appRoutes: {
             "": "menu",
             "welcome": "welcome",
-            "main": "main"
+            "main": "main",
+            "new": "new",
+            "signup": "signup"
         }
 
     });
