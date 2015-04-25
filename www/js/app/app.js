@@ -11,6 +11,21 @@ define(['jquery', 'backbone', 'marionette', 'app/router',
 
     app.addInitializer(function(options) {
 
+        Backbone.originalSync = Backbone.sync;
+
+        Backbone.sync = function (method, model, options) {
+            options.headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            };
+
+            if (method === ('create' || 'update')) {
+                options.type = 'POST';
+            }
+
+            return Backbone.originalSync(method, model, options);
+        };
+
         //у коллекций и композитов свой рендеринг остался тем не менее
         Marionette.ItemView.prototype.originalRender = Marionette.ItemView.prototype.render;
 

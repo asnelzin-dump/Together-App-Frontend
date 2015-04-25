@@ -4,13 +4,13 @@ define(['backbone', 'marionette'], function (Backbone, Marionette) {
 
     var main;
 
-    function popupView(options) {
+    function popupView(helpers, model) {
         require(['menu/layout', 'popup/view'], function (MenuLayout, PopupView) {
             if (!(main.currentView instanceof MenuLayout)) {
                 main.show(new MenuLayout());
             }
 
-            main.currentView.popup.show(new PopupView({ templateHelpers: options }));
+            main.currentView.popup.show(new PopupView({ templateHelpers: helpers, model: model }));
         });
     }
 
@@ -33,17 +33,21 @@ define(['backbone', 'marionette'], function (Backbone, Marionette) {
         },
 
         main: function() {
-            require(['main/layout'], function(MainLayout) {
-                main.show(new MainLayout());
+            require(['main/layout', 'main/model', 'main/collection'], function(MainLayout, MainModel, MainCollection) {
+                main.show(new MainLayout({ model: new MainModel(), collection: new MainCollection() }));
             });
         },
 
         new: function() {
-            popupView({ title: "Собрать компанию" });
+            require(['popup/new_model'], function(NewModel) {
+                popupView({ title: "Собрать компанию" }, new NewModel());
+            });
         },
 
         signup: function() {
-            popupView({ title: "Присоединиться" });
+            require(['popup/signup_model'], function(SignupModel) {
+                popupView({ title: "Присоединиться" }, new SignupModel());
+            });
         }
 
     });
